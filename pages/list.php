@@ -1,3 +1,37 @@
+<?php
+require_once("database.php");
+require_once("classes.php");
+$address = - 1;
+if (isset($_REQUEST["address"])) {
+    $search = $_REQUEST["address"];
+}
+
+$pdo = connectDatabase();
+$sql = "select * from hotels where pref like '%$add%' or city like '%$add%' or address like '%$add%';";
+$pstmt = $pdo->prepare($sql);
+
+$pstmt->execute($params);
+$rs = $pstmt->fetchAll();
+$hotels = [];
+foreach ($rs as $record){
+    $id = intval($record["id"]);
+    $name = $record["name"];
+    $price = $record["price"];
+    $pref = $record["pref"];
+    $city = $record["city"];
+    $address = $address["address"];
+    $memo = $record["memo"];
+    $image = $recird["image"];
+    $hotel = new Hotel($id, $name, $price, $pref, $city, $address, $memo, $image);
+    $hotels[]= $hotel;
+}
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 

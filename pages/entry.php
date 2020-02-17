@@ -1,13 +1,33 @@
 <?php
-require_once("../database.php");
-require_once("../classes.php");
+require_once("database.php");
+require_once("classes.php");
 
+$pdo = connectDatabase();
+$sql = "select * from list";
+$pstmt = $pdo->prepare($sql);
+$pstmt->execute();
+$rs = $pstmt->fetchAll();
+disconnectDatabase($pdo);
 
+$list = [];
+foreach ($rs as $record){
+    $id = intval ($record["id"]);
+    $name = $record["name"];
+    $price = $record["price"];
+    $pref = $record["pref"];
+    $city = $record["city"];
+    $address = $address["address"];
+    $memo = $record["memo"];
+    $image = $recird["image"];
+    $list = new Lists($id, $name, $price, $pref, $city, $address, $memo, $image);
+    $list[] = $lists;
+}
 
 echo"<pre>";
-var_dump($hotels);
+var_dump($list);
 echo"</pre>";
 exit(0);
+
 
 ?>
 
